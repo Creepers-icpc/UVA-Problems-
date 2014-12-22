@@ -1,0 +1,56 @@
+//http://uva.onlinejudge.org/external/2/294.html
+#include <iostream>
+#include <math.h>
+using namespace std;
+
+int divcount(int i)
+{
+    int coun=1;
+    int sq=sqrt(i);
+    for(int o=2;o<=sq;o++)
+    {
+        int p=0;
+        while(i%o==0)
+        {
+            p++;
+            i/=o;
+        }
+        if(p!=0)
+        {
+            coun*=p+1;
+            sq=sqrt(i);
+        }
+    }
+    if(i!=1)
+    {
+        coun*=1+1;
+    }
+    return coun;
+}
+
+int main()
+{
+    //numero de casos
+    int ncasos;
+    cin>>ncasos;
+    for(int casos=0;casos<ncasos;casos++)
+    {
+        //limites l y u
+        int l,u;
+        cin>>l>>u;
+        //contador y numero
+        int maxdiv=0,maxnum=0;
+        for(int i=l;i<=u;i++)
+        {
+            int divisorcount =divcount(i);
+            if(divisorcount>maxdiv)
+            {
+                maxdiv=divisorcount;
+                maxnum=i;
+            }
+        }
+        cout<<"Between "<<l<<" and "<<u<<", "<<maxnum<<" has a maximum of "<<maxdiv<<" divisors."<<endl;
+    }
+    return 0;
+}
+
